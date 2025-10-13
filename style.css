@@ -4,6 +4,10 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "fallout";
+  src: url("sharetechmono.ttf") format("truetype");
+}
 
 body {
 font-family: "basiic", serif;
