@@ -24,3 +24,58 @@ background-size: 100px;
   border-radius: 6px;
   margin: 0 auto;
 }
+
+/*sidebar and layout*/
+
+.layout {
+  display: flex;
+  justify-content: center;   
+  align-items: flex-start;   
+  gap: 20px;                 
+  padding: 20px;
+}
+
+.sidebar {
+  background: white;
+  color: black;
+  padding: 15px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  width: 180px;              
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 10px 0;
+}
+
+.sidebar a {
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+.sidebar #now-playing .track {
+  font-family: "basiic";
+  font-size: 15px;
+  margin: 10px 0;
+  line-height: 1.2;
+}
+
+.sidebar #now-playing .playing {
+  display: block;
+  color: #111111;
+  font-size: 15px;
+  margin-top: 4px;
+}

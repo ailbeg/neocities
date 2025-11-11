@@ -1,26 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ailbe's site!</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico" >
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>ailbe's site!</title> 
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="icon" type="image/x-icon" href="favicon.ico" > 
 </head>
 <body>
-    <div class="box">
-    <h1>welcome to my little website! :3</h1>
-    <p>my name's ailbe, and welcome to my website! this is a very basic HTML page, and i'll work on it more soon. right now, this is just some placeholder text. eventually, i'd like to</p>
-    <ul>
-        <li>add some more pages</li>
-        <li> add some css</li>
-        <li>make it look nice!</li>
-    </ul>
-    <p2><a href="about.html">this</a> is a link to a different page! this one will be about my interests i think :3</p2>
-    <footer>
-        <p>this is a heavy wip!!! from 10/12/25 :3</p>
-        <p1>coded with arch and vscodium, with love</p1>
-    </footer>
+    <div class="layout">
+
+        <div class="sidebar">
+            <h2>navigation</h2>
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="about.html">about me</a></li>
+                <li><h2></h2>
+                    <div id="now-playing">
+                      <em>loading…</em>
+                    </div></li>
+                <li><a href="#">links</a></li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h1>welcome to my little website! :3</h1>
+            <p>my name's ailbe, and welcome to my website! this is a very basic HTML page...</p>
+            <ul>
+                <li>add some more pages</li>
+                <li>add some css</li>
+                <li>make it look nice!</li>
+            </ul>
+
+            <p><a href="about.html">this</a> is a link to a different page!</p>
+
+            <footer>
+                <p>this is a heavy wip!!! from 10/12/25 :3</p>
+                <p>coded with arch and vscodium, with love</p>
+            </footer>
+        </div>
+
     </div>
+    <script>
+        const LASTFM_USER = "itsailbe";
+        const LASTFM_API_KEY = "787ec7fec90ad6d3b337dac14204c131";
+        const endpoint = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+      
+        function updateNowPlaying() {
+          fetch(endpoint)
+            .then(res => res.json())
+            .then(data => {
+              const track = data.recenttracks.track[0];
+              if (!track) {
+                document.getElementById("now-playing").innerHTML = "<em>No recent track found.</em>";
+                return;
+              }
+              const artist = track.artist["#text"] || "Unknown Artist";
+              const title  = track.name || "Unknown Title";
+              const url    = track.url || "#";
+              const isNow  = track["@attr"] && track["@attr"].nowplaying === "true";
+      
+              const html = `
+                <div class="track">
+                  <a href="${url}" target="_blank">${artist} – ${title}</a>
+                  ${ isNow ? '<span class="playing"> listening now</span>' : ''}
+                </div>
+              `;
+              document.getElementById("now-playing").innerHTML = html;
+            })
+            .catch(err => {
+              console.error(err);
+              document.getElementById("now-playing").innerHTML = "<em>error loading track info</em>";
+            });
+        }
+      
+        updateNowPlaying();
+      </script>
+      
 </body>
-</html>
