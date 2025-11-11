@@ -44,11 +44,6 @@ background-size: 100px;
   width: 180px;              
 }
 
-.sidebar h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
 .sidebar ul {
   list-style-type: none;
   padding: 0;
